@@ -1,4 +1,4 @@
-（function(){
+(function(){
 	//命名空间
 	var Lily = {}
 	if(!window.Lily){
@@ -9,7 +9,7 @@
 		if(other === false
 			|| !Array.prototype.push
 			|| !Object.hasOwnProperty
-			|| !document.createElment
+			|| !document.createElement
 			|| !document.getElementsByTagName
 		){
 			return false;
@@ -135,4 +135,4 @@
 	}
 	Lily['prependChild'] = prependChild;
 
-})()
+})();
