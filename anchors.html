@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="Lily-0.1.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	Lily.addEvent(window, "load", function(){
+		var aTags = Lily.getElementsByClassName("popup");
+		for(var i = 0 ; i < aTags.length; i++){
+			Lily.addEvent(aTags[i], "click", function(){
+				alert(this.href);
+				return false;
+			});
+		}
+	});
+	</script>
+</head>
+<body>
+	<ul>
+		<li><a href="hello.html" class="popup">hello</a></li>
+		<li><a href="hello.html" class="popup">hello</a></li>
+		<li><a href="hello.html" class="popup">hello</a></li>
+	</ul>
+</body>
+</html>
