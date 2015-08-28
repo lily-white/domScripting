@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="Lily-0.3.js"></script>
+	<script type="text/javascript" src="generateDom.js"></script>
+	<script type="text/javascript">
+		Lily.addEvent(window, 'load', function (){
+			Lily.addEvent(Lily.$('generate'), 'click', function (){
+				Lily.$('strDom').value = Lily.generateDom(Lily.$('strHtml').value );
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<fieldset>
+		<label for="strHtml">请输入要转换的HTML字符串</label> <br>
+		<textarea id="strHtml" cols=30 rows= 15></textarea>
+	</fieldset>
+	<input type="button" value="生成" id="generate">
+	<fieldset>
+		<label for="strDom">生成的dom字符串</label> <br>
+		<textarea id="strDom" cols=30 rows= 15></textarea>
+	</fieldset>
+</body>
+</html>
