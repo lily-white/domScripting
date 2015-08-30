@@ -3,20 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="Lily-0.1.js" type="text/javascript"></script>
+	<script src="Lily-0.4.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	Lily.addEvent(window, "load", function(){
-		var aTags = Lily.getElementsByClassName("popup");
-		for(var i = 0 ; i < aTags.length; i++){
-			Lily.addEvent(aTags[i], "click", function(){
-				alert(this.href);
-				return false;
-			});
-		}
+		// var aTags = Lily.getElementsByClassName("popup");
+		// for(var i = 0 ; i < aTags.length; i++){
+		// 	Lily.addEvent(aTags[i], "click", function(){
+		// 		alert(this.href);
+		// 		return false;
+		// 	});
+		// }
+		var follower = Lily.$("follower");
+		follower.style.position = "absolute";
+		Lily.addEvent(document, "mousemove", function (event){
+			
+			var pointer = Lily.getPositionInDocument(event);
+			follower.style.left = pointer.x + "px";
+			follower.style.top = pointer.y + "px";
+		});
 	});
 	</script>
 </head>
 <body>
+<span id="follower">follower</span>
 	<ul>
 		<li><a href="hello.html" class="popup">hello</a></li>
 		<li><a href="hello.html" class="popup">hello</a></li>
