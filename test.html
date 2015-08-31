@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="Lily-0.5.js"></script>
+	<script type="text/javascript" src="fadeColor.js"></script>
+	<script type="text/javascript">
+		Lily.addEvent(window, "load", function (){
+			fadeColor({'r': 255, 'g': 255, 'b': 255}, {'r': 0, 'g': 0, 'b': 0}, function (color){
+				document.body.style.backgroundColor = color;
+			}, 10, 50);
+		});
+	</script>
+</head>
+<body class="hi">
+	
+</body>
+</html>

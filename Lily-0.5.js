@@ -357,4 +357,106 @@ if(!String.trim){
 		return {'code': code, 'value': value};
 	}
 	Lily['getKeyPressed'] = getKeyPressed;
+
+	function setStyleById(elem, styles){
+		if(!(elem = $(elem))) return false;
+
+		for(prop in styles){
+			if(!styles.hasOwnProperty(prop)) continue;
+
+			if(elem.style.setProperty){
+				elem.style.setProperty(prop, styles[prop]);
+			}else{
+				elem.style[camelize(prop)] = styles[prop];
+			}
+		}
+		return true;
+	}
+	Lily['setStyleById'] = setStyleById;
+
+	function setStyleByClass(parent, tag, className, styles){
+		var elements = getElementsByClassName(className, tag, parent);
+		for(var i = 0; i < elements.length; i++){
+			setStyleById(elements[i], styles);
+		}
+		return true;
+	}
+	Lily['setStyleByClass'] = setStyleByClass;
+
+	function setStyleByTag(tag, styles, parent){
+		parent = $(parent) || document;
+		var elements = parent.getElementsByTagName(tag);
+
+		for(var i = 0; i < elements.length; i++){
+			setStyleById(elements[i], styles);
+		}
+		return true;
+	}
+	Lily['setStyleByTag'] = setStyleByTag;
+
+	function getClassNames(elem){
+		if(!(elem = $(elem))) return false;
+		return elem.className.split(/\s+/);
+	}
+	Lily['getClassNames'] = getClassNames;
+
+	function hasClassName(elem, className){
+		if(!(elem = $(elem))) return false;
+		var classNames = getClassNames(elem);
+
+		for (var i = 0; i < classNames.length; i++) {
+			if(classNames[i] === className) return true;
+		}
+
+		return false;
+	}
+	Lily['hasClassName'] = hasClassName;
+
+	function addClassName(elem, className){
+		if(!(elem = $(elem))) return false;
+		elem.className += (elem.className? ' ' : '') + className;
+		return true;
+	}
+	Lily['addClassName'] = addClassName;
+
+	function removeClassName(elem, className){
+		if(!(elem = $(elem))) return false;
+		var classNames =  getClassNames(elem);
+		var length = classNames.length;
+
+		for (var i = length - 1; i >= 0; i--) {
+			if(classNames[i] === className) delete classNames[i];
+		};
+
+		elem.className = classNames.join(' ');
+		return (length == classNames.length) ? false : true;
+	}
+	Lily['removeClassName'] = removeClassName;
+
+	function toggleClassName(elem, className){
+		if(!(elem = $(elem))) return false;
+		if(hasClassName(elem, className)){
+			removeClassName(elem, className);
+		}else{
+			addClassName(elem, className);
+		}
+	}
+	Lily['toggleClassName'] = toggleClassName;
+
+	function getComputedStyle(elem, property){
+		if(!(elem = $(elem)) || !property) return false;
+		var value = elem.style[camelize(property)];
+
+		if(!value){
+			if(document.defaultView && document.defaultView.getComputedStyle){
+				var css = document.defaultView.getComputedStyle(elem, null);
+				value = css ? css.getPropertyValue(property) : null;
+			}else if(elem.currentStyle){
+				value = elem.currentStyle[camelize(property)];
+			}
+		}
+
+	    return value == "auto" ? '' : value;
+	}
+	Lily['getComputedStyle'] = getComputedStyle;
 })();
